@@ -19,6 +19,8 @@ public class SimpleGroundedController : MonoBehaviour
     void Start()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
+
+        // print(IsGrounded+" SimpleGroundedController.CD in Start()");  // This prints False
     }
 
     void Update()
@@ -33,9 +35,11 @@ public class SimpleGroundedController : MonoBehaviour
 
     void FixedUpdate()
     {
+        // print(IsGrounded+" SimpleGroundedController.CD in Start()");  // This prints as we expect
+
         // Handle jump.
         // NOTE: If instructed to jump, we'll check if we're grounded.
-        if (m_ShouldJump && IsGrounded)
+        if (m_ShouldJump && m_Rigidbody.IsTouching(ContactFilter))
             m_Rigidbody.AddForce(Vector2.up * JumpImpulse, ForceMode2D.Impulse);
 
         // Set sideways velocity.
@@ -46,3 +50,4 @@ public class SimpleGroundedController : MonoBehaviour
         m_SideSpeed = 0f;
     }
 }
+ 
